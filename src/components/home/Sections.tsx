@@ -4,17 +4,16 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import { STATS, FEATURES, HOW_STEPS, TESTIMONIALS } from '@/lib/constants';
 
 const ICONS: Record<string, React.ReactNode> = {
-  zap:     <Zap     size={20} />,
-  shield:  <Shield  size={20} />,
+  zap: <Zap size={20} />,
+  shield: <Shield size={20} />,
   percent: <Percent size={20} />,
 };
 
 /* ─── Stats ─────────────────────────────────────────────────── */
 export function StatsRow() {
   return (
-    <div style={{
-      display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-      gap: '1px', background: 'var(--border)',
+    <div className="stats-grid" style={{
+      display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)',
       borderTop: '1px solid var(--border)',
       borderBottom: '1px solid var(--border)',
     }}>
@@ -41,7 +40,7 @@ export function StatsRow() {
 /* ─── Features ───────────────────────────────────────────────── */
 export function FeaturesSection() {
   return (
-    <section style={{ padding: '72px 32px' }}>
+    <section className="features-section" style={{ padding: '72px 32px' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <ScrollReveal>
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -70,7 +69,7 @@ export function FeaturesSection() {
           </div>
         </ScrollReveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div className="features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
           {FEATURES.map((f, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
               <div
@@ -114,7 +113,7 @@ export function FeaturesSection() {
 /* ─── How It Works ───────────────────────────────────────────── */
 export function HowItWorks() {
   return (
-    <section style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
+    <section className="how-section" style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <ScrollReveal>
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -142,11 +141,11 @@ export function HowItWorks() {
           </div>
         </ScrollReveal>
 
-        <div style={{ display: 'flex', position: 'relative' }}>
+        <div className="how-steps" style={{ display: 'flex', position: 'relative' }}>
           {HOW_STEPS.map((step, i) => (
             <ScrollReveal key={i} delay={i * 0.12} style={{ flex: 1, textAlign: 'center', padding: '0 20px', position: 'relative' }}>
               {i < HOW_STEPS.length - 1 && (
-                <div style={{
+                <div className="how-connector" style={{
                   position: 'absolute', top: 22, left: '65%', width: '40%',
                   height: 1, background: 'var(--border)',
                 }} />
@@ -175,7 +174,7 @@ export function HowItWorks() {
 /* ─── Testimonials ───────────────────────────────────────────── */
 export function Testimonials() {
   return (
-    <section style={{ padding: '72px 32px' }}>
+    <section className="testimonials-section" style={{ padding: '72px 32px' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <ScrollReveal>
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -200,7 +199,7 @@ export function Testimonials() {
           </div>
         </ScrollReveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
           {TESTIMONIALS.map((t, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
               <div style={{

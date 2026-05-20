@@ -16,17 +16,9 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer style={{
-      background: 'var(--bg2)',
-      borderTop: '1px solid var(--border)',
-      padding: '48px 32px 24px',
-    }}>
+    <footer className="footer" style={{ background: 'var(--bg2)', borderTop: '1px solid var(--border)', padding: '48px 32px 24px' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr 1.5fr',
-          gap: 32, marginBottom: 40,
-        }}>
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1.5fr', gap: 32, marginBottom: 40 }}>
           {/* Brand */}
           <div>
             <Link href="/" style={{ textDecoration: 'none' }}>
@@ -105,12 +97,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          paddingTop: 20, borderTop: '1px solid var(--border)',
-        }}>
+        <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, borderTop: '1px solid var(--border)' }}>
           <p style={{ fontSize: 12, color: 'var(--text3)' }}>
-            © 2025 Antares Technologies Inc. Todos los derechos reservados.
+            © 2026 Antares Technologies Inc. Todos los derechos reservados.
           </p>
           <div style={{ display: 'flex', gap: 16 }}>
             {['Privacidad', 'Términos', 'Cookies'].map(item => (

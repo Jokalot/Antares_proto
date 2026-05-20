@@ -9,7 +9,7 @@ export function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
+    <section className="faq-section" style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <ScrollReveal>
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -37,7 +37,7 @@ export function FAQSection() {
         <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
           {FAQS.map((faq, i) => (
             <ScrollReveal key={i} delay={i * 0.06}>
-              <div style={{
+              <div className="faq-item" style={{
                 background: 'var(--bg)', border: '1px solid',
                 borderColor: open === i ? 'rgba(139,92,246,0.3)' : 'var(--border)',
                 borderRadius: 12, overflow: 'hidden',
@@ -74,10 +74,7 @@ export function FAQSection() {
                       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <div style={{
-                        padding: '0 20px 16px',
-                        borderTop: '1px solid var(--border)',
-                      }}>
+                      <div className="faq-item-body" style={{ padding: '0 20px 16px', borderTop: '1px solid var(--border)' }}>
                         <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, paddingTop: 12 }}>
                           {faq.a}
                         </p>
@@ -96,12 +93,11 @@ export function FAQSection() {
 
 export function CTASection() {
   return (
-    <section style={{ padding: '72px 32px' }}>
+    <section className="cta-section" style={{ padding: '72px 32px' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <ScrollReveal>
-          <div style={{
-            background: 'var(--bg2)', border: '1px solid var(--border)',
-            borderRadius: 22, padding: '60px 40px', textAlign: 'center',
+          <div className="cta-card" style={{
+            background: 'var(--bg2)', borderRadius: 22, padding: '60px 40px', textAlign: 'center',
             maxWidth: 680, margin: '0 auto', position: 'relative', overflow: 'hidden',
           }}>
             {/* Decorative glow */}
@@ -131,7 +127,7 @@ export function CTASection() {
               Más de 1.8 millones de traders ya confían en Antares.
             </p>
 
-            <div style={{ display: 'flex', gap: 10, justifyContent: 'center', position: 'relative' }}>
+            <div className="cta-buttons" style={{ display: 'flex', gap: 10, justifyContent: 'center', position: 'relative' }}>
               <button style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '0 24px', height: 46, borderRadius: 11,

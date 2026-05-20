@@ -1,22 +1,22 @@
 export const COINS = [
-  { id: 'BTC', name: 'Bitcoin',  sym: '₿', color: '#F7931A', price: 95420 },
-  { id: 'ETH', name: 'Ethereum', sym: 'Ξ', color: '#627EEA', price: 3280  },
-  { id: 'SOL', name: 'Solana',   sym: '◎', color: '#9945FF', price: 142   },
-  { id: 'BNB', name: 'BNB',      sym: 'B', color: '#F3BA2F', price: 412   },
-  { id: 'USDT',name: 'Tether',   sym: '$', color: '#26A17B', price: 1     },
+  { id: 'BTC', name: 'Bitcoin', sym: '₿', color: '#F7931A', price: 95420 },
+  { id: 'ETH', name: 'Ethereum', sym: 'Ξ', color: '#627EEA', price: 3280 },
+  { id: 'SOL', name: 'Solana', sym: '◎', color: '#9945FF', price: 142 },
+  { id: 'BNB', name: 'BNB', sym: 'B', color: '#F3BA2F', price: 412 },
+  { id: 'USDT', name: 'Tether', sym: '$', color: '#26A17B', price: 1 },
 ] as const;
 
 export const TICKERS = [
-  { s: 'BTC',   p: 95420,  c: 2.4  },
-  { s: 'ETH',   p: 3280,   c: 1.8  },
-  { s: 'SOL',   p: 142,    c: 5.1  },
-  { s: 'BNB',   p: 412,    c: -0.9 },
-  { s: 'ADA',   p: 0.52,   c: 3.2  },
-  { s: 'XRP',   p: 0.61,   c: -1.1 },
-  { s: 'DOT',   p: 8.9,    c: 4.3  },
-  { s: 'MATIC', p: 0.88,   c: 2.7  },
-  { s: 'AVAX',  p: 38.2,   c: -0.5 },
-  { s: 'LINK',  p: 14.6,   c: 1.9  },
+  { s: 'BTC', p: 95420, c: 2.4 },
+  { s: 'ETH', p: 3280, c: 1.8 },
+  { s: 'SOL', p: 142, c: 5.1 },
+  { s: 'BNB', p: 412, c: -0.9 },
+  { s: 'ADA', p: 0.52, c: 3.2 },
+  { s: 'XRP', p: 0.61, c: -1.1 },
+  { s: 'DOT', p: 8.9, c: 4.3 },
+  { s: 'MATIC', p: 0.88, c: 2.7 },
+  { s: 'AVAX', p: 38.2, c: -0.5 },
+  { s: 'LINK', p: 14.6, c: 1.9 },
 ];
 
 export const FEATURES = [
@@ -42,14 +42,14 @@ export const FEATURES = [
 
 export const STATS = [
   { value: '$2.4B+', label: 'Volumen diario' },
-  { value: '1.8M+',  label: 'Usuarios activos' },
-  { value: '200+',   label: 'Criptomonedas' },
+  { value: '1.8M+', label: 'Usuarios activos' },
+  { value: '200+', label: 'Criptomonedas' },
 ];
 
 export const HOW_STEPS = [
-  { n: '01', title: 'Crea tu cuenta',       desc: 'Solo tu email y contraseña. Sin formularios interminables.' },
+  { n: '01', title: 'Crea tu cuenta', desc: 'Solo tu email y contraseña. Sin formularios interminables.' },
   { n: '02', title: 'Verifica tu identidad', desc: 'KYC automatizado. Aprobación en menos de 24 horas.' },
-  { n: '03', title: 'Opera al instante',     desc: 'Deposita y accede a más de 200 pares de trading.' },
+  { n: '03', title: 'Opera al instante', desc: 'Deposita y accede a más de 200 pares de trading.' },
 ];
 
 export const TESTIMONIALS = [
@@ -94,14 +94,15 @@ export const FAQS = [
 ];
 
 export const NAV_LINKS = [
-  { href: '/features', label: 'Features' },
-  { href: '/about',    label: 'Nosotros' },
-  { href: '/contact',  label: 'Contacto' },
+  { href: '/', label: 'Inicio' },
+  { href: '/features', label: 'Detalles' },
+  { href: '/about', label: 'Nosotros' },
+  { href: '/contact', label: 'Contacto' },
 ];
 
 export const TEAM = [
-  { initials: 'CR', name: 'Carlos Reyes',  role: 'CEO & Co-founder', bio: 'Ex-Coinbase · 12 años en crypto', from: '#06B6D4', to: '#8B5CF6' },
-  { initials: 'LM', name: 'Laura Méndez', role: 'CTO & Co-founder', bio: 'Ex-Google · PhD MIT',              from: '#10B981', to: '#06B6D4' },
-  { initials: 'PG', name: 'Pablo García', role: 'CFO',               bio: 'Ex-Goldman Sachs · CFA',          from: '#8B5CF6', to: '#EC4899' },
-  { initials: 'AT', name: 'Ana Torres',   role: 'Head of Design',    bio: 'Ex-Stripe · Awwwards speaker',    from: '#F59E0B', to: '#EF4444' },
+  { initials: 'CR', name: 'Carlos Reyes', role: 'CEO & Co-founder', bio: 'Ex-Coinbase · 12 años en crypto', from: '#06B6D4', to: '#8B5CF6' },
+  { initials: 'LM', name: 'Laura Méndez', role: 'CTO & Co-founder', bio: 'Ex-Google · PhD MIT', from: '#10B981', to: '#06B6D4' },
+  { initials: 'PG', name: 'Pablo García', role: 'CFO', bio: 'Ex-Goldman Sachs · CFA', from: '#8B5CF6', to: '#EC4899' },
+  { initials: 'AT', name: 'Ana Torres', role: 'Head of Design', bio: 'Ex-Stripe · Awwwards speaker', from: '#F59E0B', to: '#EF4444' },
 ];

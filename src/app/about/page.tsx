@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
+      <section className="about-hero" style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
         <ScrollReveal>
           <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--cyan)', marginBottom: 14, display: 'block' }}>
             Nuestra historia
@@ -31,7 +31,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section style={{ padding: '72px 32px' }}>
+      <section className="about-team-section" style={{ padding: '72px 32px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <ScrollReveal>
             <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -44,7 +44,7 @@ export default function AboutPage() {
               </h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+          <div className="team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {TEAM.map((m, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <div style={{

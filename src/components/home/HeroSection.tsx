@@ -8,8 +8,8 @@ type CoinId = typeof COINS[number]['id'];
 
 const CALC_TABS = [
   { id: 'exchange', label: 'Exchange' },
-  { id: 'buy',      label: 'Comprar' },
-  { id: 'sell',     label: 'Vender' },
+  { id: 'buy', label: 'Comprar' },
+  { id: 'sell', label: 'Vender' },
 ] as const;
 
 function CoinSelector({
@@ -120,15 +120,15 @@ function CoinSelector({
 export default function HeroSection() {
   const [activeTab, setActiveTab] = useState<'exchange' | 'buy' | 'sell'>('exchange');
   const [fromCoin, setFromCoin] = useState<CoinId>('BTC');
-  const [toCoin, setToCoin]     = useState<CoinId>('USDT');
-  const [fromAmt, setFromAmt]   = useState('1');
+  const [toCoin, setToCoin] = useState<CoinId>('USDT');
+  const [fromAmt, setFromAmt] = useState('1');
   const [rotating, setRotating] = useState(false);
 
   const fromData = COINS.find(c => c.id === fromCoin)!;
-  const toData   = COINS.find(c => c.id === toCoin)!;
-  const rate     = fromData.price / toData.price;
-  const toAmt    = (parseFloat(fromAmt) * rate || 0).toFixed(toCoin === 'USDT' ? 2 : 6);
-  const rateStr  = rate.toFixed(toCoin === 'USDT' ? 2 : 6);
+  const toData = COINS.find(c => c.id === toCoin)!;
+  const rate = fromData.price / toData.price;
+  const toAmt = (parseFloat(fromAmt) * rate || 0).toFixed(toCoin === 'USDT' ? 2 : 6);
+  const rateStr = rate.toFixed(toCoin === 'USDT' ? 2 : 6);
 
   function swap() {
     setRotating(true);
@@ -143,11 +143,11 @@ export default function HeroSection() {
   };
   const item = {
     hidden: { opacity: 0, y: 28 },
-    show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   return (
-    <section style={{ position: 'relative', textAlign: 'center', padding: '80px 32px 64px', overflow: 'hidden' }}>
+    <section className="hero-section" style={{ position: 'relative', textAlign: 'center', padding: '80px 32px 64px', overflow: 'clip' }}>
       {/* Orbs */}
       <div className="orb" style={{ width: 500, height: 500, background: 'var(--violet)', top: -200, left: '10%' }} />
       <div className="orb" style={{ width: 400, height: 400, background: 'var(--cyan2)', top: -100, right: '5%' }} />
@@ -162,7 +162,7 @@ export default function HeroSection() {
             padding: '5px 14px', borderRadius: 100, letterSpacing: '0.4px', textTransform: 'uppercase',
           }}>
             <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block' }} />
-            Nueva plataforma disponible
+            Una nueva forma de ver el exchange
           </div>
         </motion.div>
 
@@ -185,7 +185,7 @@ export default function HeroSection() {
         </motion.p>
 
         {/* Buttons */}
-        <motion.div variants={item} style={{ display: 'flex', gap: 10, justifyContent: 'center', marginBottom: 56 }}>
+        <motion.div variants={item} className="hero-buttons" style={{ display: 'flex', gap: 10, justifyContent: 'center', marginBottom: 56 }}>
           <button style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '0 24px', height: 46, borderRadius: 11,
@@ -215,7 +215,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Calculator Card */}
-        <motion.div variants={item} style={{ maxWidth: 460, margin: '0 auto' }}>
+        <motion.div variants={item} className="hero-calc" style={{ maxWidth: 460, margin: '0 auto' }}>
           <div style={{
             background: 'var(--bg2)', border: '1px solid var(--border)',
             borderRadius: 18, padding: 24, textAlign: 'left',

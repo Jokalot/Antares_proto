@@ -3,18 +3,18 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import { BarChart2, Grid, Lock, Home, Smartphone, Clock } from 'lucide-react';
 
 const ALL_FEATURES = [
-  { title: 'Charts avanzados',      desc: 'Análisis técnico con más de 100 indicadores. TradingView integrado de forma nativa.', color: '#22D3EE', icon: BarChart2 },
-  { title: 'API REST & WebSocket',   desc: 'Conecta tu sistema con latencia inferior a 1ms. Documentación completa incluida.',       color: '#8B5CF6', icon: Grid },
-  { title: 'Seguro de activos',      desc: 'Primeros $250,000 asegurados contra hackeos. Auditorías trimestrales certificadas.',     color: '#10B981', icon: Lock },
-  { title: 'DeFi integrado',         desc: 'Accede a los mejores protocolos DeFi directamente desde tu cuenta Antares.',             color: '#FBBF24', icon: Home },
-  { title: 'App móvil nativa',       desc: 'iOS y Android con funcionalidad completa. Alertas push en tiempo real.',                 color: '#F87171', icon: Smartphone },
-  { title: 'Trading automatizado',   desc: 'Bots con estrategias predefinidas o crea las tuyas. Backtesting incluido.',              color: '#22D3EE', icon: Clock },
+  { title: 'Charts avanzados', desc: 'Análisis técnico con más de 100 indicadores. TradingView integrado de forma nativa.', color: '#22D3EE', icon: BarChart2 },
+  { title: 'API REST & WebSocket', desc: 'Conecta tu sistema con latencia inferior a 1ms. Documentación completa incluida.', color: '#8B5CF6', icon: Grid },
+  { title: 'Seguro de activos', desc: 'Primeros $250,000 asegurados contra hackeos. Auditorías trimestrales certificadas.', color: '#10B981', icon: Lock },
+  { title: 'DeFi integrado', desc: 'Accede a los mejores protocolos DeFi directamente desde tu cuenta Antares.', color: '#FBBF24', icon: Home },
+  { title: 'App móvil nativa', desc: 'iOS y Android con funcionalidad completa. Alertas push en tiempo real.', color: '#F87171', icon: Smartphone },
+  { title: 'Trading automatizado', desc: 'Bots con estrategias predefinidas o crea las tuyas. Backtesting incluido.', color: '#22D3EE', icon: Clock },
 ];
 
 export default function FeaturesPage() {
   return (
     <>
-      <section style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
+      <section className="features-page-hero" style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
         <ScrollReveal>
           <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--cyan)', marginBottom: 14, display: 'block' }}>
             Capacidades
@@ -35,9 +35,9 @@ export default function FeaturesPage() {
         </ScrollReveal>
       </section>
 
-      <section style={{ padding: '72px 32px' }}>
+      <section className="features-page-section" style={{ padding: '72px 32px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+          <div className="features-page-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
             {ALL_FEATURES.map((f, i) => {
               const Icon = f.icon;
               return (
