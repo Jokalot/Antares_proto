@@ -23,7 +23,7 @@ export default function TickerBar() {
         animation: 'ticker 35s linear infinite',
       }}>
         {items.map((t, i) => {
-          const up = t.c >= 0;
+          const up = (t.c ?? 0) >= 0;
           return (
             <div
               key={i}
@@ -37,10 +37,10 @@ export default function TickerBar() {
                 {t.s}
               </span>
               <span style={{ color: 'var(--text2)' }}>
-                ${t.p.toLocaleString()}
+                ${t.p?.toLocaleString() ?? '...'}
               </span>
               <span style={{ color: up ? 'var(--green)' : 'var(--red)', fontSize: 11, fontWeight: 600 }}>
-                {up ? '▲' : '▼'}{Math.abs(t.c).toFixed(2)}%
+                {up ? '▲' : '▼'}{Math.abs(t.c ?? 0).toFixed(2)}%
               </span>
               <span style={{ width: 1, height: 14, background: 'var(--border)', display: 'inline-block', marginLeft: 8 }} />
             </div>
