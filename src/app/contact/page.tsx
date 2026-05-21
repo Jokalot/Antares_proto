@@ -1,18 +1,25 @@
 'use client';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import { section } from 'framer-motion/client';
-import { Send, MessageCircle, Mail, Phone } from 'lucide-react';
+import { Send, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
+import { COMPANY } from '@/lib/constants';
 
 const INFO = [
-  { icon: MessageCircle, label: 'Live Chat', val: 'Respuesta en 5 min' },
-  { icon: Mail, label: 'Email', val: 'hola@antares.io' },
-  { icon: Phone, label: 'Teléfono', val: 'Lun–Vie 9–18h' },
+  { icon: MessageCircle, label: 'Live Chat', val: 'Respuesta en 5 min', desc: 'Disponible 24/7' },
+  { icon: Mail, label: 'Email', val: COMPANY.email, desc: 'Respondemos en menos de 2h' },
+  { icon: MapPin, label: 'Dirección', val: COMPANY.direccion, desc: 'Sede principal' },
+  { icon: Clock, label: 'Horario', val: 'Lun – Vie', desc: '9:00 – 18:00 UTC' },
 ];
 
 export default function ContactPage() {
   return (
     <>
-      <section className="contact-hero" style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
+      {/* Hero */}
+      <section className="contact-hero" style={{
+        padding: '72px 32px 48px',
+        background: 'var(--bg2)',
+        borderBottom: '1px solid var(--border)',
+        textAlign: 'center',
+      }}>
         <ScrollReveal>
           <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--cyan)', marginBottom: 14, display: 'block' }}>
             Contacto
@@ -23,7 +30,10 @@ export default function ContactPage() {
             letterSpacing: '-2.5px', marginBottom: 18, lineHeight: 1.06,
           }}>
             Hablemos de{' '}
-            <span style={{ background: 'linear-gradient(135deg, var(--cyan), var(--violet))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <span style={{
+              background: 'linear-gradient(135deg, var(--cyan), var(--violet))',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>
               tu proyecto
             </span>
           </h1>
@@ -33,10 +43,59 @@ export default function ContactPage() {
         </ScrollReveal>
       </section>
 
+      {/* Contenido principal — dos columnas */}
       <section className="contact-section" style={{ padding: '72px 32px' }}>
-        <div style={{ maxWidth: 580, margin: '0 auto' }}>
-          <ScrollReveal>
-            <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 18, padding: 32 }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 48, alignItems: 'stretch' }}>
+
+          {/* ── LEFT: info ── */}
+          <ScrollReveal style={{ height: '100%' }}>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, letterSpacing: '-0.5px', marginBottom: 8 }}>
+                Estamos aquí para ayudarte
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 32 }}>
+                Ya sea que tengas preguntas sobre nuestra plataforma, necesites soporte técnico o quieras explorar una integración empresarial, nuestro equipo está listo para asistirte.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {INFO.map(({ icon: Icon, label, val, desc }) => (
+                  <div key={label} style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 16,
+                    background: 'var(--bg2)', border: '1px solid var(--border)',
+                    borderRadius: 14, padding: '16px 20px',
+                    transition: 'border-color 0.18s',
+                  }}
+                    onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--borderac)'}
+                    onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'}
+                  >
+                    <div style={{
+                      width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+                      background: 'rgba(59,130,246,0.1)', color: 'var(--cyan)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <Icon size={18} strokeWidth={1.8} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text3)', marginBottom: 3 }}>{label}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>{val}</div>
+                      <div style={{ fontSize: 12, color: 'var(--text3)' }}>{desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* ── RIGHT: formulario ── */}
+          <ScrollReveal delay={0.1} style={{ height: '100%' }}>
+            <div style={{
+              background: 'var(--bg2)', border: '1px solid var(--border)',
+              borderRadius: 20, padding: 36, height: "100%"
+            }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, marginBottom: 24, letterSpacing: '-0.3px' }}>
+                Envíanos un mensaje
+              </h3>
+
               <div className="contact-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
                 {[
                   { label: 'Nombre', placeholder: 'Tu nombre completo', type: 'text' },
@@ -75,14 +134,15 @@ export default function ContactPage() {
                   <option>Soporte técnico</option>
                   <option>Ventas Enterprise</option>
                   <option>API / Integración</option>
+                  <option>KYC / Verificación</option>
                   <option>Otro</option>
                 </select>
               </div>
 
-              <div style={{ marginBottom: 20 }}>
+              <div style={{ marginBottom: 24 }}>
                 <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text3)', marginBottom: 7 }}>Mensaje</label>
                 <textarea
-                  rows={4}
+                  rows={5}
                   placeholder="Cuéntanos cómo podemos ayudarte..."
                   style={{
                     width: '100%', background: 'var(--bg3)', border: '1px solid var(--border)',
@@ -96,9 +156,9 @@ export default function ContactPage() {
               </div>
 
               <button style={{
-                width: '100%', height: 44, borderRadius: 10,
+                width: '100%', height: 48, borderRadius: 12,
                 background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
-                border: 'none', color: '#fff', fontSize: 14, fontWeight: 700,
+                border: 'none', color: '#fff', fontSize: 15, fontWeight: 700,
                 cursor: 'pointer', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8, transition: 'opacity 0.18s',
                 fontFamily: 'var(--font-display)',
@@ -106,24 +166,13 @@ export default function ContactPage() {
                 onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.opacity = '0.87'}
                 onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.opacity = '1'}
               >
-                Enviar mensaje <Send size={14} />
+                Enviar mensaje <Send size={15} />
               </button>
-            </div>
-          </ScrollReveal>
 
-          {/* Info cards */}
-          <ScrollReveal delay={0.1}>
-            <div className="contact-info-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginTop: 14 }}>
-              {INFO.map(({ icon: Icon, label, val }) => (
-                <div key={label} style={{
-                  background: 'var(--bg3)', border: '1px solid var(--border)',
-                  borderRadius: 11, padding: 16, textAlign: 'center',
-                }}>
-                  <Icon size={18} style={{ color: 'var(--cyan)', marginBottom: 8 }} strokeWidth={1.8} />
-                  <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 3 }}>{label}</div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text3)' }}>{val}</div>
-                </div>
-              ))}
+              <p style={{ fontSize: 12, color: 'var(--text3)', textAlign: 'center', marginTop: 14 }}>
+                Al enviar aceptas nuestra{' '}
+                <span style={{ color: 'var(--cyan)', cursor: 'pointer' }}>Política de Privacidad</span>
+              </p>
             </div>
           </ScrollReveal>
         </div>
