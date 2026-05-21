@@ -49,7 +49,8 @@ export const STATS = [
 export const HOW_STEPS = [
   { n: '01', title: 'Crea tu cuenta', desc: 'Solo tu email y contraseña. Sin formularios interminables.' },
   { n: '02', title: 'Verifica tu identidad', desc: 'KYC automatizado. Aprobación en menos de 24 horas.' },
-  { n: '03', title: 'Opera al instante', desc: 'Deposita y accede a más de 200 pares de trading.' },
+  { n: '03', title: 'Deposita fondos', desc: 'Vía transferencia bancaria, tarjeta o directo en cripto.' },
+  { n: '04', title: 'Opera al instante', desc: 'Accede a más de 200 pares de trading inmediatamente.' },
 ];
 
 export const TESTIMONIALS = [
@@ -106,3 +107,13 @@ export const TEAM = [
   { initials: 'PG', name: 'Pablo García', role: 'CFO', bio: 'Ex-Goldman Sachs · CFA', from: '#8B5CF6', to: '#EC4899' },
   { initials: 'AT', name: 'Ana Torres', role: 'Head of Design', bio: 'Ex-Stripe · Awwwards speaker', from: '#F59E0B', to: '#EF4444' },
 ];
+
+
+export const COMPANY = {
+  mision: 'Hacer el trading de criptomonedas accesible, seguro y fácil de usar para todos. Nuestra plataforma fue creada con la visión de empoderar a las personas para explorar el mundo de las monedas digitales.',
+  vision: 'Un ecosistema cripto donde nuestra plataforma sirva como nexo para los entusiastas. No solo una plataforma — somos un catalizador de cambio donde todos pueden conectar, innovar y dar forma al futuro de las finanzas.',
+  quienesSomos: 'Somos un equipo de expertos en blockchain y criptomonedas con años de experiencia en la industria. Nuestros diversos antecedentes en finanzas, tecnología y seguridad nos permiten ofrecer una plataforma que prioriza la seguridad, la transparencia y la innovación.',
+  email: 'support@antarescapitalx.com',
+  direccion: '22 Baker Street, London',
+  dominio: 'https://antares-capitalx.com',
+};

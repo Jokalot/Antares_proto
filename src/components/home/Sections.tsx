@@ -127,7 +127,7 @@ export function HowItWorks() {
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-1.5px', marginBottom: 10,
             }}>
-              Tres pasos para{' '}
+              Cuatro pasos para{' '}
               <span style={{
                 background: 'linear-gradient(135deg, var(--cyan), var(--violet))',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
@@ -141,28 +141,51 @@ export function HowItWorks() {
           </div>
         </ScrollReveal>
 
-        <div className="how-steps" style={{ display: 'flex', position: 'relative' }}>
+        <div className="how-steps" style={{ display: 'flex', position: 'relative', gap: 12 }}>
           {HOW_STEPS.map((step, i) => (
-            <ScrollReveal key={i} delay={i * 0.12} style={{ flex: 1, textAlign: 'center', padding: '0 20px', position: 'relative' }}>
+            <ScrollReveal
+              key={i}
+              delay={i * 0.15}
+              style={{ flex: 1, position: 'relative' }}
+            >
               {i < HOW_STEPS.length - 1 && (
                 <div className="how-connector" style={{
-                  position: 'absolute', top: 22, left: '65%', width: '40%',
-                  height: 1, background: 'var(--border)',
-                }} />
+                  position: 'absolute', top: 33, right: -26,
+                  zIndex: 2,
+                  display: 'flex', alignItems: 'center', gap: 2,
+                }}>
+                  <div style={{ width: 40, height: 2, background: 'var(--cyan2)', opacity: 0.5 }} />
+                  <span style={{ color: 'var(--cyan2)', opacity: 0.8, fontSize: 32, lineHeight: 1 }}>›</span>
+                </div>
               )}
               <div style={{
-                width: 44, height: 44, borderRadius: '50%',
-                background: 'var(--bg3)', border: '1px solid var(--border)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 16px',
-                fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 800, color: 'var(--cyan)',
-              }}>
-                {step.n}
+                background: 'var(--bg)', border: '1px solid var(--border)',
+                borderRadius: 16, padding: '28px 20px', textAlign: 'center',
+                transition: 'all 0.22s', height: '100%', position: 'relative',
+              }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--borderac)';
+                  (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+                }}
+              >
+                <div style={{
+                  width: 44, height: 44, borderRadius: '50%',
+                  background: 'var(--bg3)', border: '1px solid var(--borderac)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 16px',
+                  fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 800, color: 'var(--cyan)',
+                }}>
+                  {step.n}
+                </div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 700, marginBottom: 8 }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text2)', lineHeight: 1.55 }}>{step.desc}</p>
               </div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 700, marginBottom: 7 }}>
-                {step.title}
-              </h3>
-              <p style={{ fontSize: 12.5, color: 'var(--text2)', lineHeight: 1.55 }}>{step.desc}</p>
             </ScrollReveal>
           ))}
         </div>
