@@ -36,54 +36,52 @@ export function FAQSection() {
 
         <div style={{ maxWidth: 660, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
           {FAQS.map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 0.06}>
-              <div className="faq-item" style={{
-                background: 'var(--bg)', border: '1px solid',
-                borderColor: open === i ? 'rgba(139,92,246,0.3)' : 'var(--border)',
-                borderRadius: 12, overflow: 'hidden',
-                transition: 'border-color 0.2s',
-              }}>
-                <button
-                  onClick={() => setOpen(open === i ? null : i)}
-                  style={{
-                    width: '100%', background: 'none', border: 'none',
-                    color: 'var(--text)', padding: '15px 20px',
-                    textAlign: 'left', fontSize: 14, fontWeight: 600,
-                    cursor: 'pointer', display: 'flex', justifyContent: 'space-between',
-                    alignItems: 'center', gap: 12, letterSpacing: '-0.1px',
-                    fontFamily: 'var(--font-body)',
-                  }}
+            <div key={i} className="faq-item" style={{
+              background: 'var(--bg)', border: '1px solid',
+              borderColor: open === i ? 'rgba(139,92,246,0.3)' : 'var(--border)',
+              borderRadius: 12, overflow: 'hidden',
+              transition: 'border-color 0.2s',
+            }}>
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                style={{
+                  width: '100%', background: 'none', border: 'none',
+                  color: 'var(--text)', padding: '15px 20px',
+                  textAlign: 'left', fontSize: 14, fontWeight: 600,
+                  cursor: 'pointer', display: 'flex', justifyContent: 'space-between',
+                  alignItems: 'center', gap: 12, letterSpacing: '-0.1px',
+                  fontFamily: 'var(--font-body)',
+                }}
+              >
+                {faq.q}
+                <motion.div
+                  animate={{ rotate: open === i ? 45 : 0 }}
+                  transition={{ duration: 0.22 }}
+                  style={{ flexShrink: 0, color: open === i ? 'var(--violet)' : 'var(--text3)' }}
                 >
-                  {faq.q}
-                  <motion.div
-                    animate={{ rotate: open === i ? 45 : 0 }}
-                    transition={{ duration: 0.22 }}
-                    style={{ flexShrink: 0, color: open === i ? 'var(--violet)' : 'var(--text3)' }}
-                  >
-                    <Plus size={16} />
-                  </motion.div>
-                </button>
+                  <Plus size={16} />
+                </motion.div>
+              </button>
 
-                <AnimatePresence initial={false}>
-                  {open === i && (
-                    <motion.div
-                      key="body"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <div className="faq-item-body" style={{ padding: '0 20px 16px', borderTop: '1px solid var(--border)' }}>
-                        <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, paddingTop: 12 }}>
-                          {faq.a}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </ScrollReveal>
+              <AnimatePresence initial={false}>
+                {open === i && (
+                  <motion.div
+                    key="body"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="faq-item-body" style={{ padding: '0 20px 16px', borderTop: '1px solid var(--border)' }}>
+                      <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, paddingTop: 12 }}>
+                        {faq.a}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
       </div>
