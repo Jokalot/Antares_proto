@@ -117,8 +117,7 @@ h4,
 /* Reduce orb blur on mobile for better GPU performance */
 @media (max-width: 768px) {
   .orb {
-    filter: blur(50px);
-    opacity: 0.12;
+    display: none;
   }
 }
 
@@ -137,6 +136,20 @@ body::before {
 @media (max-width: 768px) {
   body::before {
     display: none;
+  }
+
+  /* Prevent GPU compositing artifacts from framer-motion transforms */
+  section,
+  .faq-section,
+  .cta-section,
+  .features-section,
+  .how-section,
+  .testimonials-section,
+  .hero-section {
+    transform: none !important;
+    will-change: auto !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
 

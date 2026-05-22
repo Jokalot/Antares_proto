@@ -1,12 +1,19 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ArrowRight, FileText } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { FAQS } from '@/lib/constants';
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
+  return isMobile;
+}
+
 export function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <section className="faq-section" style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
@@ -54,33 +61,56 @@ export function FAQSection() {
                 }}
               >
                 {faq.q}
-                <motion.div
-                  animate={{ rotate: open === i ? 45 : 0 }}
-                  transition={{ duration: 0.22 }}
-                  style={{ flexShrink: 0, color: open === i ? 'var(--violet)' : 'var(--text3)' }}
-                >
-                  <Plus size={16} />
-                </motion.div>
+                {isMobile ? (
+                  <div style={{
+                    flexShrink: 0,
+                    color: open === i ? 'var(--violet)' : 'var(--text3)',
+                    transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.22s, color 0.22s',
+                  }}>
+                    <Plus size={16} />
+                  </div>
+                ) : (
+                  <motion.div
+                    animate={{ rotate: open === i ? 45 : 0 }}
+                    transition={{ duration: 0.22 }}
+                    style={{ flexShrink: 0, color: open === i ? 'var(--violet)' : 'var(--text3)' }}
+                  >
+                    <Plus size={16} />
+                  </motion.div>
+                )}
               </button>
 
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    key="body"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ overflow: 'hidden' }}
-                  >
+              {isMobile ? (
+                open === i && (
+                  <div style={{ overflow: 'hidden' }}>
                     <div className="faq-item-body" style={{ padding: '0 20px 16px', borderTop: '1px solid var(--border)' }}>
                       <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, paddingTop: 12 }}>
                         {faq.a}
                       </p>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                )
+              ) : (
+                <AnimatePresence initial={false}>
+                  {open === i && (
+                    <motion.div
+                      key="body"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div className="faq-item-body" style={{ padding: '0 20px 16px', borderTop: '1px solid var(--border)' }}>
+                        <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, paddingTop: 12 }}>
+                          {faq.a}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
             </div>
           ))}
         </div>

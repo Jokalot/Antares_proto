@@ -5,7 +5,11 @@ import { ArrowRight, Play, ArrowUpDown, RefreshCw, ChevronDown } from 'lucide-re
 import { COINS } from '@/lib/constants';
 import { usePrices } from '@/lib/usePrices';
 
-
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
+  return isMobile;
+}
 
 interface Candle {
   o: number; c: number; h: number; l: number; t: string;
@@ -185,6 +189,7 @@ function CoinSelector({
 }
 
 export default function HeroSection() {
+  const isMobile = useIsMobile();
 
   const { tickers } = usePrices();
   // Precio real de BTC
@@ -258,14 +263,15 @@ export default function HeroSection() {
     setToCoin(fromCoin);
   }
 
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.1 } },
-  };
-  const item = {
-    hidden: { opacity: 0, y: 28 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-  };
+  const container = isMobile
+    ? { hidden: {}, show: {} }
+    : { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+  const item = isMobile
+    ? { hidden: {}, show: {} }
+    : {
+        hidden: { opacity: 0, y: 28 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+      };
 
   return (
     <section className="hero-section" style={{ position: 'relative', padding: '40px 32px 48px', overflow: 'clip' }}>
