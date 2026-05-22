@@ -516,3 +516,19 @@ body::before {
     box-sizing: border-box !important;
   }
 }
+
+
+/* ── HeroSection móvil ── */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-dashboard {
+    display: none !important;
+  }
+
+  .hero-calc {
+    display: none !important;
+  }
+}

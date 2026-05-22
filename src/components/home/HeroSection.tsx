@@ -269,9 +269,9 @@ export default function HeroSection() {
   const item = isMobile
     ? { hidden: {}, show: {} }
     : {
-        hidden: { opacity: 0, y: 28 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-      };
+      hidden: { opacity: 0, y: 28 },
+      show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+    };
 
   return (
     <section className="hero-section" style={{ position: 'relative', padding: '40px 32px 48px', overflow: 'clip' }}>
@@ -281,6 +281,7 @@ export default function HeroSection() {
 
       <motion.div
         variants={container} initial="hidden" animate="show"
+        className="hero-grid"
         style={{
           position: 'relative', zIndex: 1,
           maxWidth: 1200, margin: '0 auto',
@@ -351,7 +352,7 @@ export default function HeroSection() {
         </div>
 
         {/* ── COL 2: dashboard ── */}
-        <motion.div variants={item} style={{
+        <motion.div variants={item} className="hero-dashboard" style={{
           background: 'var(--bg2)', border: '1px solid var(--border)',
           borderRadius: 18, overflow: 'hidden',
         }}>
