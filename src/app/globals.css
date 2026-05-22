@@ -132,20 +132,17 @@ body::before {
   opacity: 0.4;
 }
 
-/* Disable noise overlay on mobile — SVG feTurbulence causes rendering glitches */
 @media (max-width: 768px) {
   body::before {
     display: none;
   }
 
-  /* Prevent GPU compositing artifacts from framer-motion transforms */
   section,
   .faq-section,
   .cta-section,
   .features-section,
   .how-section,
-  .testimonials-section,
-  .hero-section {
+  .testimonials-section {
     transform: none !important;
     will-change: auto !important;
     -webkit-backface-visibility: hidden;
