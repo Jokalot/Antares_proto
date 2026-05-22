@@ -10,9 +10,9 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-export default function ScrollReveal({ children, delay = 0, y = 24, className, style }: Props) {
+export default function ScrollReveal({ children, delay = 0, y = 16, className, style }: Props) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: true, margin: '0px' });
 
   return (
     <motion.div
