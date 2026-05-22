@@ -282,9 +282,6 @@ body::before {
     justify-content: center !important;
   }
 
-  .hero-calc {
-    max-width: 100% !important;
-  }
 }
 
 /* ── TickerBar ── */
