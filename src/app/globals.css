@@ -511,8 +511,7 @@ body::before {
   }
 }
 
-
-/* ── HeroSection móvil ── */
+/* ── Hero móvil — ocultar solo dashboard ── */
 @media (max-width: 768px) {
   .hero-grid {
     grid-template-columns: 1fr !important;
@@ -523,6 +522,6 @@ body::before {
   }
 
   .hero-calc {
-    display: none !important;
+    display: block !important;
   }
 }
