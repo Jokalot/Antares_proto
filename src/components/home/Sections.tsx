@@ -113,17 +113,13 @@ export function FeaturesSection() {
 /* ─── How It Works ───────────────────────────────────────────── */
 export function HowItWorks() {
   return (
-    <section className="how-section" style={{ padding: '72px 32px', background: 'var(--bg2)', position: 'relative', overflow: 'hidden' }}>
-
-
-      {/* Fondo decorativo */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: `radial-gradient(circle, rgba(59,130,246,0.07) 1px, transparent 1px)`,
-        backgroundSize: '28px 28px',
-        pointerEvents: 'none',
-      }} />
-
+    <section className="how-section" style={{
+      padding: '72px 32px',
+      position: 'relative',
+      backgroundImage: `radial-gradient(circle, rgba(59,130,246,0.07) 1px, transparent 1px)`,
+      backgroundSize: '28px 28px',
+      backgroundColor: 'var(--bg2)',
+    }}>
 
       <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <ScrollReveal>
