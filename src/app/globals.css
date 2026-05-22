@@ -114,6 +114,14 @@ h4,
   opacity: 0.18;
 }
 
+/* Reduce orb blur on mobile for better GPU performance */
+@media (max-width: 768px) {
+  .orb {
+    filter: blur(50px);
+    opacity: 0.12;
+  }
+}
+
 /* Noise texture overlay */
 body::before {
   content: '';
@@ -123,6 +131,13 @@ body::before {
   pointer-events: none;
   z-index: 0;
   opacity: 0.4;
+}
+
+/* Disable noise overlay on mobile — SVG feTurbulence causes rendering glitches */
+@media (max-width: 768px) {
+  body::before {
+    display: none;
+  }
 }
 
 

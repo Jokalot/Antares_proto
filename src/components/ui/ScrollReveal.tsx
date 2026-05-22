@@ -1,6 +1,6 @@
 'use client';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -13,19 +13,6 @@ interface Props {
 export default function ScrollReveal({ children, delay = 0, y = 16, className, style }: Props) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '0px' });
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
-
-  if (isMobile) {
-    return (
-      <div ref={ref} className={className} style={style}>
-        {children}
-      </div>
-    );
-  }
 
   return (
     <motion.div
