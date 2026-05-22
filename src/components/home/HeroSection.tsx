@@ -1,16 +1,10 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight, Play, ArrowUpDown, RefreshCw, ChevronDown } from 'lucide-react';
 import { COINS } from '@/lib/constants';
 import { usePrices } from '@/lib/usePrices';
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
-  return isMobile;
-}
-
+// ── Tipos ─────────────────────────────────────────────────────
 interface Candle {
   o: number; c: number; h: number; l: number; t: string;
 }
@@ -30,7 +24,7 @@ const INITIAL_CANDLES: Candle[] = [
   { o: 94, c: 102, h: 110, l: 92, t: '13:55' },
 ];
 
-
+// ── CandleChart ───────────────────────────────────────────────
 function CandleChart({ candles }: { candles: Candle[] }) {
   const W = 300;
   const H = 160;
@@ -46,14 +40,8 @@ function CandleChart({ candles }: { candles: Candle[] }) {
   return (
     <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ overflow: 'visible' }}>
       {[0.25, 0.5, 0.75].map((t, i) => (
-        <line
-          key={i}
-          x1={0} y1={scaleY(minV + range * t)}
-          x2={W} y2={scaleY(minV + range * t)}
-          stroke="rgba(255,255,255,0.06)"
-          strokeWidth={1}
-          strokeDasharray="3 3"
-        />
+        <line key={i} x1={0} y1={scaleY(minV + range * t)} x2={W} y2={scaleY(minV + range * t)}
+          stroke="rgba(255,255,255,0.06)" strokeWidth={1} strokeDasharray="3 3" />
       ))}
       {candles.map((d, i) => {
         const x = startX + i * (cw + gap);
@@ -74,7 +62,7 @@ function CandleChart({ candles }: { candles: Candle[] }) {
   );
 }
 
-
+// ── CoinSelector ──────────────────────────────────────────────
 type CoinId = typeof COINS[number]['id'];
 
 const CALC_TABS = [
@@ -83,12 +71,8 @@ const CALC_TABS = [
   { id: 'sell', label: 'Vender' },
 ] as const;
 
-function CoinSelector({
-  value, onChange, exclude,
-}: {
-  value: CoinId;
-  onChange: (id: CoinId) => void;
-  exclude: CoinId;
+function CoinSelector({ value, onChange, exclude }: {
+  value: CoinId; onChange: (id: CoinId) => void; exclude: CoinId;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -105,98 +89,66 @@ function CoinSelector({
 
   return (
     <div ref={ref} style={{ position: 'relative' }}>
-      <button
-        onClick={() => setOpen(o => !o)}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 7,
-          background: 'var(--bg3)', border: '1px solid var(--border)',
-          color: 'var(--text)', padding: '0 12px', height: 44,
-          borderRadius: 10, cursor: 'pointer', fontSize: 13, fontWeight: 700,
-          whiteSpace: 'nowrap', transition: 'border-color 0.18s',
-          borderColor: open ? 'var(--borderac)' : 'var(--border)',
-        }}
-      >
+      <button onClick={() => setOpen(o => !o)} style={{
+        display: 'flex', alignItems: 'center', gap: 7,
+        background: 'var(--bg3)', border: '1px solid var(--border)',
+        color: 'var(--text)', padding: '0 12px', height: 44,
+        borderRadius: 10, cursor: 'pointer', fontSize: 13, fontWeight: 700,
+        whiteSpace: 'nowrap', transition: 'border-color 0.18s',
+        borderColor: open ? 'var(--borderac)' : 'var(--border)',
+      }}>
         <div style={{
-          width: 22, height: 22, borderRadius: '50%',
-          background: coin.color,
+          width: 22, height: 22, borderRadius: '50%', background: coin.color,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 10, fontWeight: 800, color: '#fff',
-        }}>
-          {coin.sym}
-        </div>
+        }}>{coin.sym}</div>
         {coin.id}
-        <ChevronDown
-          size={13}
-          style={{
-            color: 'var(--text3)',
-            transition: 'transform 0.2s',
-            transform: open ? 'rotate(180deg)' : 'rotate(0)',
-          }}
-        />
+        <ChevronDown size={13} style={{
+          color: 'var(--text3)', transition: 'transform 0.2s',
+          transform: open ? 'rotate(180deg)' : 'rotate(0)',
+        }} />
       </button>
 
       {open && (
-        <motion.div
-          initial={{ opacity: 0, y: -6, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          style={{
-            position: 'absolute', top: 'calc(100% + 6px)', right: 0,
-            background: 'var(--bg2)', border: '1px solid var(--border)',
-            borderRadius: 12, padding: 4, minWidth: 170, zIndex: 50,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-          }}
-        >
+        <div style={{
+          position: 'absolute', top: 'calc(100% + 6px)', right: 0,
+          background: 'var(--bg2)', border: '1px solid var(--border)',
+          borderRadius: 12, padding: 4, minWidth: 170, zIndex: 50,
+          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+        }}>
           {options.map(opt => (
-            <button
-              key={opt.id}
-              onClick={() => { onChange(opt.id as CoinId); setOpen(false); }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 9,
-                width: '100%', padding: '9px 12px', borderRadius: 8,
-                background: opt.id === value ? 'var(--bg3)' : 'transparent',
-                border: 'none', cursor: 'pointer',
-                color: opt.id === value ? 'var(--cyan)' : 'var(--text)',
-                fontSize: 13, fontWeight: 600, textAlign: 'left',
-                transition: 'background 0.15s',
-              }}
-              onMouseEnter={e => {
-                if (opt.id !== value) (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg3)';
-              }}
-              onMouseLeave={e => {
-                if (opt.id !== value) (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
-              }}
+            <button key={opt.id} onClick={() => { onChange(opt.id as CoinId); setOpen(false); }} style={{
+              display: 'flex', alignItems: 'center', gap: 9,
+              width: '100%', padding: '9px 12px', borderRadius: 8,
+              background: opt.id === value ? 'var(--bg3)' : 'transparent',
+              border: 'none', cursor: 'pointer',
+              color: opt.id === value ? 'var(--cyan)' : 'var(--text)',
+              fontSize: 13, fontWeight: 600, textAlign: 'left', transition: 'background 0.15s',
+            }}
+              onMouseEnter={e => { if (opt.id !== value) (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg3)'; }}
+              onMouseLeave={e => { if (opt.id !== value) (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
             >
               <div style={{
-                width: 22, height: 22, borderRadius: '50%',
-                background: opt.color,
+                width: 22, height: 22, borderRadius: '50%', background: opt.color,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 10, fontWeight: 800, color: '#fff', flexShrink: 0,
-              }}>
-                {opt.sym}
-              </div>
+              }}>{opt.sym}</div>
               <span>{opt.id}</span>
-              <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text3)', fontWeight: 400 }}>
-                {opt.name}
-              </span>
+              <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text3)', fontWeight: 400 }}>{opt.name}</span>
             </button>
           ))}
-        </motion.div>
+        </div>
       )}
     </div>
   );
 }
 
+// ── HeroSection ───────────────────────────────────────────────
 export default function HeroSection() {
-  const isMobile = useIsMobile();
-
   const { tickers } = usePrices();
-  // Precio real de BTC
   const liveBtcPrice = tickers.find(t => t.s === 'BTC')?.p ?? 95420;
   const liveBtcChange = tickers.find(t => t.s === 'BTC')?.c ?? 2.4;
 
-  // Estados
   const [activeTab, setActiveTab] = useState<'exchange' | 'buy' | 'sell'>('exchange');
   const [fromCoin, setFromCoin] = useState<CoinId>('BTC');
   const [toCoin, setToCoin] = useState<CoinId>('USDT');
@@ -205,7 +157,14 @@ export default function HeroSection() {
   const [btcPrice, setBtcPrice] = useState(95420);
   const [btcChange, setBtcChange] = useState(2.4);
   const [candles, setCandles] = useState<Candle[]>(INITIAL_CANDLES);
-  const baseRef = useRef(liveBtcPrice); // ← usa el precio real como base
+  const [visible, setVisible] = useState(false);
+  const baseRef = useRef(95420);
+
+  // Fade in sin framer-motion — CSS puro
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 50);
+    return () => clearTimeout(t);
+  }, []);
 
   const tick = useCallback(() => {
     const delta = (Math.random() - 0.48) * 120;
@@ -214,7 +173,6 @@ export default function HeroSection() {
     const pct = parseFloat(((base / 94000 - 1) * 100).toFixed(2));
     setBtcPrice(base);
     setBtcChange(pct);
-
     if (Math.random() < 0.25) {
       setCandles(prev => {
         const last = prev[prev.length - 1];
@@ -246,15 +204,11 @@ export default function HeroSection() {
 
   const fromData = COINS.find(c => c.id === fromCoin)!;
   const toData = COINS.find(c => c.id === toCoin)!;
-
   const fromPrice = tickers.find(t => t.s === fromCoin)?.p ?? fromData.price;
   const toPrice = tickers.find(t => t.s === toCoin)?.p ?? toData.price;
-
   const rate = fromPrice / toPrice;
   const toAmt = (parseFloat(fromAmt) * rate || 0).toFixed(toCoin === 'USDT' ? 2 : 6);
   const rateStr = rate.toFixed(toCoin === 'USDT' ? 2 : 6);
-
-
 
   function swap() {
     setRotating(true);
@@ -263,24 +217,12 @@ export default function HeroSection() {
     setToCoin(fromCoin);
   }
 
-  const container = isMobile
-    ? { hidden: {}, show: {} }
-    : { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-  const item = isMobile
-    ? { hidden: {}, show: {} }
-    : {
-      hidden: { opacity: 0, y: 28 },
-      show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-    };
-
   return (
     <section className="hero-section" style={{ position: 'relative', padding: '40px 32px 48px', overflow: 'clip' }}>
-      {/* Orbs */}
       <div className="orb" style={{ width: 500, height: 500, background: '#2563EB', top: -200, left: '10%' }} />
       <div className="orb" style={{ width: 400, height: 400, background: '#2563EB', top: -100, right: '5%' }} />
 
-      <motion.div
-        variants={container} initial="hidden" animate="show"
+      <div
         className="hero-grid"
         style={{
           position: 'relative', zIndex: 1,
@@ -288,11 +230,14 @@ export default function HeroSection() {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr',
           gap: 32, alignItems: 'center',
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'opacity 0.6s ease, transform 0.6s ease',
         }}
       >
         {/* ── COL 1: copy ── */}
         <div>
-          <motion.div variants={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 28 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 28 }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.22)',
@@ -302,9 +247,9 @@ export default function HeroSection() {
               <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block' }} />
               Una nueva forma de ver el exchange
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1 variants={item} style={{
+          <h1 style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(28px, 3vw, 46px)',
             fontWeight: 800, lineHeight: 1.06,
@@ -312,16 +257,13 @@ export default function HeroSection() {
           }}>
             Opera cripto a<br />
             <span className="grad">velocidad estelar</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p variants={item} style={{
-            fontSize: 15, color: 'var(--text2)',
-            marginBottom: 36, lineHeight: 1.65, textAlign: 'left',
-          }}>
+          <p style={{ fontSize: 15, color: 'var(--text2)', marginBottom: 36, lineHeight: 1.65, textAlign: 'left' }}>
             Compra, vende e intercambia más de 200 criptomonedas con las comisiones más bajas y seguridad de nivel institucional.
-          </motion.p>
+          </p>
 
-          <motion.div variants={item} className="hero-buttons" style={{ display: 'flex', gap: 10 }}>
+          <div className="hero-buttons" style={{ display: 'flex', gap: 10 }}>
             <button style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 24px', height: 46, borderRadius: 11,
@@ -348,11 +290,11 @@ export default function HeroSection() {
             >
               <Play size={14} /> Ver demo
             </button>
-          </motion.div>
+          </div>
         </div>
 
         {/* ── COL 2: dashboard ── */}
-        <motion.div variants={item} className="hero-dashboard" style={{
+        <div className="hero-dashboard" style={{
           background: 'var(--bg2)', border: '1px solid var(--border)',
           borderRadius: 18, overflow: 'hidden',
         }}>
@@ -365,10 +307,7 @@ export default function HeroSection() {
               <span style={{ fontSize: 13, fontWeight: 700, fontFamily: 'var(--font-display)' }}>BTC / USDT</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{
-                fontSize: 16, fontWeight: 800, fontFamily: 'var(--font-display)',
-                color: btcChange >= 0 ? 'var(--green)' : 'var(--red)',
-              }}>
+              <span style={{ fontSize: 16, fontWeight: 800, fontFamily: 'var(--font-display)', color: btcChange >= 0 ? 'var(--green)' : 'var(--red)' }}>
                 ${btcPrice.toLocaleString()}
               </span>
               <span style={{
@@ -400,9 +339,7 @@ export default function HeroSection() {
                   background: bg, border: `1px solid ${color}33`,
                   color, fontSize: 11, fontWeight: 700, cursor: 'pointer',
                   fontFamily: 'var(--font-display)',
-                }}>
-                  {label}
-                </button>
+                }}>{label}</button>
               </div>
             ))}
           </div>
@@ -419,10 +356,10 @@ export default function HeroSection() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* ── COL 3: calculadora ── */}
-        <motion.div variants={item} className="hero-calc">
+        <div className="hero-calc">
           <div style={{
             background: 'var(--bg2)', border: '1px solid var(--border)',
             borderRadius: 18, padding: 24, textAlign: 'left',
@@ -433,38 +370,29 @@ export default function HeroSection() {
               borderRadius: 11, marginBottom: 22,
             }}>
               {CALC_TABS.map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  style={{
-                    flex: 1, padding: '7px 12px',
-                    borderRadius: 8, cursor: 'pointer', fontSize: 13, fontWeight: 500,
-                    fontFamily: 'var(--font-body)',
-                    background: activeTab === tab.id ? 'var(--bg2)' : 'transparent',
-                    color: activeTab === tab.id ? 'var(--text)' : 'var(--text3)',
-                    boxShadow: activeTab === tab.id ? '0 1px 4px rgba(0,0,0,0.3)' : 'none',
-                    border: activeTab === tab.id ? '1px solid var(--border)' : '1px solid transparent',
-                    transition: 'all 0.18s',
-                  }}
-                >
-                  {tab.label}
-                </button>
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+                  flex: 1, padding: '7px 12px', borderRadius: 8,
+                  cursor: 'pointer', fontSize: 13, fontWeight: 500,
+                  fontFamily: 'var(--font-body)',
+                  background: activeTab === tab.id ? 'var(--bg2)' : 'transparent',
+                  color: activeTab === tab.id ? 'var(--text)' : 'var(--text3)',
+                  boxShadow: activeTab === tab.id ? '0 1px 4px rgba(0,0,0,0.3)' : 'none',
+                  border: activeTab === tab.id ? '1px solid var(--border)' : '1px solid transparent',
+                  transition: 'all 0.18s',
+                }}>{tab.label}</button>
               ))}
             </div>
 
             <div style={{ marginBottom: 8 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--text3)', marginBottom: 7 }}>Envías</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'center' }}>
-                <input
-                  type="number" value={fromAmt}
-                  onChange={e => setFromAmt(e.target.value)}
-                  style={{
-                    background: 'var(--bg3)', border: '1px solid var(--border)',
-                    color: 'var(--text)', padding: '10px 14px', borderRadius: 10,
-                    fontSize: 20, fontWeight: 700, letterSpacing: '-0.5px',
-                    outline: 'none', fontFamily: 'var(--font-display)', width: '100%',
-                    transition: 'border-color 0.18s',
-                  }}
+                <input type="number" value={fromAmt} onChange={e => setFromAmt(e.target.value)} style={{
+                  background: 'var(--bg3)', border: '1px solid var(--border)',
+                  color: 'var(--text)', padding: '10px 14px', borderRadius: 10,
+                  fontSize: 20, fontWeight: 700, letterSpacing: '-0.5px',
+                  outline: 'none', fontFamily: 'var(--font-display)', width: '100%',
+                  transition: 'border-color 0.18s',
+                }}
                   onFocus={e => (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--borderac)'}
                   onBlur={e => (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--border)'}
                 />
@@ -523,8 +451,8 @@ export default function HeroSection() {
               Iniciar intercambio <ArrowRight size={14} />
             </button>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
