@@ -113,7 +113,7 @@ export function FeaturesSection() {
 /* ─── How It Works ───────────────────────────────────────────── */
 export function HowItWorks() {
   return (
-    <section className="how-section" style={{ padding: '72px 32px', background: 'var(--bg2)' }}>
+    <section className="how-section" style={{ padding: '72px 32px', background: 'var(--bg2)', position: 'relative', overflow: 'hidden' }}>
 
 
       {/* Fondo decorativo */}
