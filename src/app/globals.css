@@ -525,3 +525,43 @@ body::before {
     display: block !important;
   }
 }
+
+/* ── Custom HeroSection Theme ── */
+.hero-custom-bg {
+  background-color: #050914;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px), radial-gradient(circle at top center, #10192d 0%, #050914 100%);
+  background-size: 28px 28px, 100% 100%;
+}
+
+.light .hero-custom-bg {
+  background-color: var(--bg2);
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.hero-logo {
+  filter: brightness(0) invert(1) drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.6));
+}
+
+.light .hero-logo {
+  filter: brightness(0) drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+/* ── Custom Header Theme ── */
+.header-logo {
+  display: block;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.light .header-logo {
+  filter: none;
+}
+
+.hero-title {
+  color: #ffffff;
+}
+
+.light .hero-title {
+  color: var(--text);
+}
