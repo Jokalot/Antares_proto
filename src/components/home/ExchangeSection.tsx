@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { ArrowRight, Play, ArrowUpDown, RefreshCw, ChevronDown } from 'lucide-react';
+import { ArrowRight, ArrowUpDown, RefreshCw, ChevronDown } from 'lucide-react';
 import { COINS } from '@/lib/constants';
 import { usePrices } from '@/lib/usePrices';
 
@@ -160,7 +160,6 @@ export default function ExchangeSection() {
   const [visible, setVisible] = useState(false);
   const baseRef = useRef(95420);
 
-  // Fade in sin framer-motion — CSS puro
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 50);
     return () => clearTimeout(t);
@@ -219,8 +218,8 @@ export default function ExchangeSection() {
 
   return (
     <section className="hero-section" style={{ position: 'relative', padding: '40px 32px 48px', overflow: 'clip' }}>
-      <div className="orb" style={{ width: 500, height: 500, background: '#2563EB', top: -200, left: '10%' }} />
-      <div className="orb" style={{ width: 400, height: 400, background: '#2563EB', top: -100, right: '5%' }} />
+      <div className="orb" style={{ width: 500, height: 500, background: '#2563EB', top: -200, left: '10%', opacity: 0.1 }} />
+      <div className="orb" style={{ width: 400, height: 400, background: '#2563EB', top: -100, right: '5%', opacity: 0.1 }} />
 
       <div
         className="hero-grid"
@@ -237,6 +236,7 @@ export default function ExchangeSection() {
       >
         {/* ── COL 1: copy ── */}
         <div>
+          {/* Badge */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 28 }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -245,52 +245,27 @@ export default function ExchangeSection() {
               padding: '5px 14px', borderRadius: 100, letterSpacing: '0.4px', textTransform: 'uppercase',
             }}>
               <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block' }} />
-              Una nueva forma de ver el exchange
+              En vivo · Precios reales
             </div>
           </div>
 
+          {/* Título */}
           <h1 style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(28px, 3vw, 46px)',
             fontWeight: 800, lineHeight: 1.06,
             letterSpacing: '-2px', marginBottom: 20, textAlign: 'left',
           }}>
-            Hola cripto a<br />
-            <span className="grad">velocidad estelar</span>
+            Tu capital,<br />
+            <span className="grad">bajo tu control</span>
           </h1>
 
+          {/* Subtítulo */}
           <p style={{ fontSize: 15, color: 'var(--text2)', marginBottom: 36, lineHeight: 1.65, textAlign: 'left' }}>
-            Compra, vende e intercambia más de 200 criptomonedas con las comisiones más bajas y seguridad de nivel institucional.
+            Sin intermediarios ni comisiones ocultas. Selecciona el par, ingresa el monto y ejecuta al instante — lo que ves es exactamente lo que recibes.
           </p>
 
-          <div className="hero-buttons" style={{ display: 'flex', gap: 10 }}>
-            <button style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 24px', height: 46, borderRadius: 11,
-              background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
-              border: 'none', color: '#fff', fontSize: 14.5, fontWeight: 700,
-              cursor: 'pointer', letterSpacing: '-0.2px', transition: 'all 0.2s',
-              fontFamily: 'var(--font-display)',
-            }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.87'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
-            >
-              Crear cuenta gratis <ArrowRight size={15} />
-            </button>
-            <button style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 22px', height: 46, borderRadius: 11,
-              background: 'var(--bg3)', border: '1px solid var(--border)',
-              color: 'var(--text2)', fontSize: 14.5, fontWeight: 600,
-              cursor: 'pointer', transition: 'all 0.18s',
-              fontFamily: 'var(--font-display)',
-            }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--borderac)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text2)'; }}
-            >
-              <Play size={14} /> Ver demo
-            </button>
-          </div>
+
         </div>
 
         {/* ── COL 2: dashboard ── */}
@@ -448,7 +423,7 @@ export default function ExchangeSection() {
               onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.opacity = '0.87'}
               onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.opacity = '1'}
             >
-              Iniciar intercambio <ArrowRight size={14} />
+              Ejecutar operación <ArrowRight size={14} />
             </button>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { ArrowRight, Play } from 'lucide-react';
 
 const IMAGES = [
   { id: 0, src: '/screen3.jpg', alt: 'Spot Trading' },
@@ -9,13 +10,20 @@ const IMAGES = [
   { id: 2, src: '/screen1.jpg', alt: 'P2P Trading' },
 ];
 
-export default function HeroSection() {
-  // Posiciones lógicas iniciales: img 0 a la izquierda, img 1 al centro, img 2 a la derecha.
-  const [positions, setPositions] = useState<('left' | 'center' | 'right')[]>(['left', 'center', 'right']);
+interface HeroSectionProps {
+  exchangeRef: React.RefObject<HTMLDivElement | null>;
+}
+
+export default function HeroSection({ exchangeRef }: HeroSectionProps) {
+  const [positions, setPositions] = useState<('left' | 'center' | 'right')[]>([
+    'left',
+    'center',
+    'right',
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPositions(prev => {
+      setPositions((prev) => {
         const leftIndex = prev.indexOf('left');
         const centerIndex = prev.indexOf('center');
         const rightIndex = prev.indexOf('right');
@@ -30,6 +38,30 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleVerDemo = () => {
+    if (!exchangeRef.current) return;
+
+    const targetY = exchangeRef.current.getBoundingClientRect().top + window.scrollY - 80;
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const duration = 1200; // ms — auméntalo para más lento
+    let startTime: number | null = null;
+
+    // Easing suave: easeInOutCubic
+    const ease = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startY + distance * ease(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
   return (
     <section
       className="hero-custom-bg"
@@ -43,7 +75,18 @@ export default function HeroSection() {
         overflow: 'hidden',
       }}
     >
-      <div className="orb" style={{ width: 900, height: 900, background: '#2563EB', top: -450, left: '50%', transform: 'translateX(-50%)', opacity: 0.08 }} />
+      <div
+        className="orb"
+        style={{
+          width: 900,
+          height: 900,
+          background: '#2563EB',
+          top: -450,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          opacity: 0.08,
+        }}
+      />
 
       {/* Contenido principal superior */}
       <div style={{ textAlign: 'center', zIndex: 10, marginBottom: '60px' }}>
@@ -80,17 +123,102 @@ export default function HeroSection() {
         </motion.h1>
       </div>
 
+      {/* Subtítulo */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        style={{
+          fontSize: 16,
+          color: 'var(--text2)',
+          maxWidth: 520,
+          margin: '0 auto 32px',
+          lineHeight: 1.65,
+          textAlign: 'center',
+        }}
+      >
+        Compra, vende e intercambia más de 200 criptomonedas con las comisiones más bajas y
+        seguridad de nivel institucional.
+      </motion.p>
+
+      {/* Botones CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 48 }}
+      >
+        <button
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '0 28px',
+            height: 48,
+            borderRadius: 12,
+            background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
+            border: 'none',
+            color: '#fff',
+            fontSize: 15,
+            fontWeight: 700,
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            fontFamily: 'var(--font-display)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '0.87';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          Crear cuenta gratis <ArrowRight size={15} />
+        </button>
+
+        <button
+          onClick={handleVerDemo}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '0 24px',
+            height: 48,
+            borderRadius: 12,
+            background: 'var(--bg3)',
+            border: '1px solid var(--border)',
+            color: 'var(--text2)',
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'all 0.18s',
+            fontFamily: 'var(--font-display)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--borderac)';
+            e.currentTarget.style.color = 'var(--text)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border)';
+            e.currentTarget.style.color = 'var(--text2)';
+          }}
+        >
+          <Play size={14} /> Ver demo
+        </button>
+      </motion.div>
+
       {/* Contenedor de las 3 imágenes animadas */}
       <div
         style={{
           position: 'relative',
           width: '100%',
           maxWidth: '1000px',
-          height: '600px', // Aproximadamente la altura de los mockups
+          height: '600px',
           display: 'flex',
           justifyContent: 'center',
           marginTop: '20px',
-          perspective: '1000px'
+          perspective: '1000px',
         }}
       >
         {IMAGES.map((img, index) => {
@@ -158,7 +286,7 @@ export default function HeroSection() {
                 alt={img.alt}
                 fill
                 style={{ objectFit: 'cover' }}
-                unoptimized // Evitar sobrecarga en desarrollo si las imágenes son locales temporales
+                unoptimized
               />
             </motion.div>
           );
