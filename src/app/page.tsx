@@ -7,6 +7,7 @@ import { FAQSection, CTASection } from '@/components/home/FAQandCTA';
 export default function Home() {
   return (
     <>
+
       <HeroSection />
       <TickerBar />
       <StatsRow />
