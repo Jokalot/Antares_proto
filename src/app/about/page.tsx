@@ -33,7 +33,7 @@ export default function AboutPage() {
             </span>
           </h1>
           <p style={{ fontSize: 17, color: 'var(--text2)', maxWidth: 600, margin: '0 auto', lineHeight: 1.65 }}>
-            {COMPANY.mision}
+            {COMPANY.slogan}
           </p>
         </ScrollReveal>
       </section>
@@ -47,7 +47,7 @@ export default function AboutPage() {
                 Nuestra misión
               </span>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 800, letterSpacing: '-0.5px', marginBottom: 14 }}>
-                Democratizando las finanzas digitales
+                Comerciante institucional de activos virtuales
               </h2>
               <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7 }}>
                 {COMPANY.mision}
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 Nuestra visión
               </span>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 800, letterSpacing: '-0.5px', marginBottom: 14 }}>
-                El futuro de las finanzas
+                Arbitraje sistemático en exchanges centralizados
               </h2>
               <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7 }}>
                 {COMPANY.vision}

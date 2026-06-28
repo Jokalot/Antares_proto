@@ -102,18 +102,26 @@ export const NAV_LINKS = [
 ];
 
 export const TEAM = [
-  { initials: 'CR', name: 'Carlos Reyes', role: 'CEO & Co-founder', bio: 'Ex-Coinbase · 12 años en crypto', from: '#06B6D4', to: '#8B5CF6' },
-  { initials: 'LM', name: 'Laura Méndez', role: 'CTO & Co-founder', bio: 'Ex-Google · PhD MIT', from: '#10B981', to: '#06B6D4' },
-  { initials: 'PG', name: 'Pablo García', role: 'CFO', bio: 'Ex-Goldman Sachs · CFA', from: '#8B5CF6', to: '#EC4899' },
-  { initials: 'AT', name: 'Ana Torres', role: 'Head of Design', bio: 'Ex-Stripe · Awwwards speaker', from: '#F59E0B', to: '#EF4444' },
+  { initials: 'AO', name: 'Ángel Martín Ortiz Estrada', role: 'Director General', bio: 'ANTARES CAPITALX, S.A.P.I. DE C.V.', from: '#06B6D4', to: '#8B5CF6' },
+  { initials: 'MM', name: 'Marcel Martínez Porchas', role: 'Gerente de Finanzas y Contabilidad', bio: 'ANTARES CAPITALX, S.A.P.I. DE C.V.', from: '#10B981', to: '#06B6D4' },
+  { initials: 'KS', name: 'Kevin Alberto Salvador Valero', role: 'Gerente de Cumplimiento y Prevención (PLD/FT)', bio: 'ANTARES CAPITALX, S.A.P.I. DE C.V.', from: '#8B5CF6', to: '#EC4899' },
+  { initials: 'CJ', name: 'César Jiménez Morales', role: 'Gerente de Operaciones y Trading', bio: 'ANTARES CAPITALX, S.A.P.I. DE C.V.', from: '#F59E0B', to: '#EF4444' },
+  { initials: 'JG', name: 'José Luis García Lucero', role: 'Gerente de Tecnología y Seguridad', bio: 'ANTARES CAPITALX, S.A.P.I. DE C.V.', from: '#3B82F6', to: '#10B981' },
 ];
 
 
 export const COMPANY = {
-  mision: 'Hacer el trading de criptomonedas accesible, seguro y fácil de usar para todos. Nuestra plataforma fue creada con la visión de empoderar a las personas para explorar el mundo de las monedas digitales.',
-  vision: 'Un ecosistema cripto donde nuestra plataforma sirva como nexo para los entusiastas. No solo una plataforma — somos un catalizador de cambio donde todos pueden conectar, innovar y dar forma al futuro de las finanzas.',
-  quienesSomos: 'Somos un equipo de expertos en blockchain y criptomonedas con años de experiencia en la industria. Nuestros diversos antecedentes en finanzas, tecnología y seguridad nos permiten ofrecer una plataforma que prioriza la seguridad, la transparencia y la innovación.',
-  email: 'support@antarescapitalx.com',
-  direccion: '22 Baker Street, London',
+  nombre: 'ANTARES CAPITALX, S.A.P.I. DE C.V.',
+  slogan: 'Comerciante institucional de activos virtuales',
+  descripcion: 'Operamos exclusivamente en exchanges centralizados como Binance, Bybit, OKX y MEXC.',
+  mision: 'Somos una sociedad mercantil mexicana legalmente constituida (Folio Mercantil N-2024097717), autorizada para compra, venta, arbitraje e intercambio de activos virtuales y transacciones P2P.',
+  vision: 'Nuestro modelo se enfoca en arbitraje sistemático dentro de exchanges centralizados.',
+  quienesSomos: 'Somos una sociedad mercantil mexicana legalmente constituida, autorizada para compra, venta, arbitraje e intercambio de activos virtuales y transacciones P2P. Nuestro modelo se enfoca en arbitraje sistemático dentro de exchanges centralizados.',
+  email: 'business@antarescapitalx.com',
+  whatsapp: '6623539743',
+  telegram: '@Antares_CapitalX',
+  direccion: 'México',
+  folioMercantil: 'N-2024097717',
+  avisoLegal: 'AVISO IMPORTANTE: Este sitio web es meramente informativo. ANTARES CAPITALX no constituye una oferta, invitación o solicitud para realizar inversiones. No ofrece servicios financieros al público ni gestiona inversiones de terceros. Toda la operativa se realiza con recursos propios de la sociedad exclusivamente dentro de exchanges centralizados.',
   dominio: 'https://antares-capitalx.com',
 };

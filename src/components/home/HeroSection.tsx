@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
+import { COMPANY } from '@/lib/constants';
 
 const IMAGES = [
   { id: 0, src: '/screen3.jpg', alt: 'Spot Trading' },
@@ -137,8 +138,7 @@ export default function HeroSection({ exchangeRef }: HeroSectionProps) {
           textAlign: 'center',
         }}
       >
-        Compra, vende e intercambia más de 200 criptomonedas con las comisiones más bajas y
-        seguridad de nivel institucional.
+        {COMPANY.slogan}. {COMPANY.descripcion}
       </motion.p>
 
       {/* Botones CTA */}

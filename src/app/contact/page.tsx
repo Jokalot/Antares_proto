@@ -1,15 +1,14 @@
 'use client';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import { Send, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
+import { Send, MessageCircle, Mail, Clock } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
 const INFO = [
-  { icon: MessageCircle, label: 'Live Chat', val: 'Respuesta en 5 min', desc: 'Disponible 24/7' },
   { icon: Mail, label: 'Email', val: COMPANY.email, desc: 'Respondemos en menos de 2h' },
-  { icon: MapPin, label: 'Dirección', val: COMPANY.direccion, desc: 'Sede principal' },
+  { icon: MessageCircle, label: 'WhatsApp', val: COMPANY.whatsapp, desc: 'Atención directa' },
+  { icon: Send, label: 'Telegram', val: COMPANY.telegram, desc: 'Respuesta inmediata' },
   { icon: Clock, label: 'Horario', val: 'Lun – Vie', desc: '9:00 – 18:00 UTC' },
 ];
-
 export default function ContactPage() {
   return (
     <>
@@ -29,16 +28,16 @@ export default function ContactPage() {
             fontSize: 'clamp(34px, 5vw, 56px)', fontWeight: 800,
             letterSpacing: '-2.5px', marginBottom: 18, lineHeight: 1.06,
           }}>
-            Hablemos de{' '}
+            Contáctanos {' '}
             <span style={{
               background: 'linear-gradient(135deg, var(--cyan), var(--violet))',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>
-              tu proyecto
+              directamente
             </span>
           </h1>
           <p style={{ fontSize: 17, color: 'var(--text2)', maxWidth: 460, margin: '0 auto', lineHeight: 1.65 }}>
-            Nuestro equipo responde en menos de 2 horas en días hábiles.
+            Director General: Ángel Martín Ortiz Estrada. Respondemos en menos de 2 horas en días hábiles.
           </p>
         </ScrollReveal>
       </section>
@@ -54,7 +53,7 @@ export default function ContactPage() {
                 Estamos aquí para ayudarte
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 32 }}>
-                Ya sea que tengas preguntas sobre nuestra plataforma, necesites soporte técnico o quieras explorar una integración empresarial, nuestro equipo está listo para asistirte.
+                Somos una sociedad mercantil mexicana legalmente constituida. Contáctanos directamente por email, WhatsApp o Telegram para cualquier consulta sobre nuestros servicios de trading de activos virtuales.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

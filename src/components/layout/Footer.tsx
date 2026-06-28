@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from '@/components/ui/Logo';
 import { ArrowRight } from 'lucide-react';
+import { COMPANY } from '@/lib/constants';
 
 const FOOTER_LINKS = {
   Plataforma: ['Exchange', 'Trading Pro', 'DeFi', 'API'],
@@ -25,7 +26,7 @@ export default function Footer() {
               <Logo width={150} />
             </Link>
             <p style={{ fontSize: 13, color: 'var(--text3)', lineHeight: 1.65, marginBottom: 18, maxWidth: 240 }}>
-              La plataforma de trading cripto más avanzada de Latinoamérica. Opera con confianza.
+              {COMPANY.slogan}. {COMPANY.descripcion}
             </p>
             <div style={{ display: 'flex', gap: 7 }}>
               {SOCIALS.map(({ label }) => (
@@ -96,10 +97,21 @@ export default function Footer() {
           </div>
         </div>
 
+
+        <div style={{
+          padding: '16px 0',
+          borderTop: '1px solid var(--border)',
+          marginBottom: 16,
+        }}>
+          <p style={{ fontSize: 11, color: 'var(--text3)', lineHeight: 1.6 }}>
+            {COMPANY.avisoLegal}
+          </p>
+        </div>
+
         {/* Bottom */}
         <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, borderTop: '1px solid var(--border)' }}>
           <p style={{ fontSize: 12, color: 'var(--text3)' }}>
-            © 2026 Antares Technologies Inc. Todos los derechos reservados.
+            © 2025 {COMPANY.nombre}. Todos los derechos reservados.
           </p>
           <div style={{ display: 'flex', gap: 16 }}>
             {['Privacidad', 'Términos', 'Cookies'].map(item => (

@@ -236,18 +236,7 @@ export default function ExchangeSection() {
       >
         {/* ── COL 1: copy ── */}
         <div>
-          {/* Badge */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 28 }}>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.22)',
-              color: 'var(--cyan)', fontSize: 11.5, fontWeight: 600,
-              padding: '5px 14px', borderRadius: 100, letterSpacing: '0.4px', textTransform: 'uppercase',
-            }}>
-              <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block' }} />
-              En vivo · Precios reales
-            </div>
-          </div>
+
 
           {/* Título */}
           <h1 style={{
