@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
+import AuthSessionProvider from '@/components/providers/SessionProvider';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
@@ -21,13 +22,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ThemeProvider>
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <AuthSessionProvider>
+          <ThemeProvider>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );

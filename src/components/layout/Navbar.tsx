@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, ArrowRight, LogIn } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowRight, LogIn, LogOut, User } from 'lucide-react';
 import { useTheme } from '@/lib/theme-context';
 import { NAV_LINKS } from '@/lib/constants';
 import Logo from '@/components/ui/Logo';
 import { createPortal } from 'react-dom';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 
 export default function Navbar() {
@@ -15,12 +16,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const isLoading = status === 'loading';
 
   return (
     <>
@@ -96,44 +100,117 @@ export default function Navbar() {
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
 
-          {/* Login */}
-          <button
-            className="hidden-mobile"
-            style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              background: 'transparent', border: '1px solid var(--border)',
-              color: 'var(--text2)', padding: '0 16px', height: 34,
-              borderRadius: 8, cursor: 'pointer', fontSize: 13,
-              transition: 'all 0.18s',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--borderac)';
-              (e.currentTarget as HTMLButtonElement).style.color = 'var(--text)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
-              (e.currentTarget as HTMLButtonElement).style.color = 'var(--text2)';
-            }}
-          >
-            <LogIn size={13} /> Iniciar sesión
-          </button>
+          {/* Auth buttons — Desktop */}
+          {isLoading ? (
+            /* Skeleton while loading session */
+            <div
+              className="hidden-mobile"
+              style={{
+                width: 80, height: 34, borderRadius: 8,
+                background: 'var(--bg3)', opacity: 0.5,
+                animation: 'pulse 1.5s ease-in-out infinite',
+              }}
+            />
+          ) : session ? (
+            /* Logged in — show user info */
+            <div className="hidden-mobile" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {/* User avatar */}
+              <div
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  background: 'var(--bg3)', border: '1px solid var(--border)',
+                  padding: '0 12px 0 4px', height: 34, borderRadius: 8,
+                }}
+              >
+                {session.user?.image ? (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name || 'Avatar'}
+                    style={{
+                      width: 26, height: 26, borderRadius: 6,
+                      objectFit: 'cover',
+                    }}
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div style={{
+                    width: 26, height: 26, borderRadius: 6,
+                    background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <User size={14} color="#fff" />
+                  </div>
+                )}
+                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {session.user?.name?.split(' ')[0] || 'Usuario'}
+                </span>
+              </div>
 
-          {/* CTA */}
-          <button
-            className="hidden-mobile"
-            style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
-              border: 'none', color: '#fff',
-              padding: '0 18px', height: 34, borderRadius: 8,
-              cursor: 'pointer', fontSize: 13, fontWeight: 600,
-              transition: 'opacity 0.18s',
-            }}
-            onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.opacity = '0.85'}
-            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.opacity = '1'}
-          >
-            Empezar <ArrowRight size={13} />
-          </button>
+              {/* Sign out */}
+              <button
+                onClick={() => signOut()}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: 'transparent', border: '1px solid var(--border)',
+                  color: 'var(--text2)', padding: '0 12px', height: 34,
+                  borderRadius: 8, cursor: 'pointer', fontSize: 13,
+                  transition: 'all 0.18s',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = '#ef4444';
+                  (e.currentTarget as HTMLButtonElement).style.color = '#ef4444';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--text2)';
+                }}
+              >
+                <LogOut size={13} /> Salir
+              </button>
+            </div>
+          ) : (
+            /* Not logged in — show login + CTA */
+            <>
+              <button
+                className="hidden-mobile"
+                onClick={() => signIn('google')}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: 'transparent', border: '1px solid var(--border)',
+                  color: 'var(--text2)', padding: '0 16px', height: 34,
+                  borderRadius: 8, cursor: 'pointer', fontSize: 13,
+                  transition: 'all 0.18s',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--borderac)';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--text)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--text2)';
+                }}
+              >
+                <LogIn size={13} /> Iniciar sesión
+              </button>
+
+              <button
+                className="hidden-mobile"
+                onClick={() => signIn('google')}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
+                  border: 'none', color: '#fff',
+                  padding: '0 18px', height: 34, borderRadius: 8,
+                  cursor: 'pointer', fontSize: 13, fontWeight: 600,
+                  transition: 'opacity 0.18s',
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.opacity = '0.85'}
+                onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.opacity = '1'}
+              >
+                Empezar <ArrowRight size={13} />
+              </button>
+            </>
+          )}
 
           {/* Mobile hamburger */}
           <button
@@ -193,15 +270,66 @@ export default function Navbar() {
                   );
                 })}
               </ul>
-              <button
-                style={{
-                  width: '100%', height: 44, borderRadius: 10,
-                  background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
-                  border: 'none', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer',
-                }}
-              >
-                Crear cuenta gratis
-              </button>
+
+              {/* Mobile auth area */}
+              {session ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    padding: '10px 12px', borderRadius: 10,
+                    background: 'var(--bg3)', border: '1px solid var(--border)',
+                  }}>
+                    {session.user?.image ? (
+                      <img
+                        src={session.user.image}
+                        alt={session.user.name || 'Avatar'}
+                        style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'cover' }}
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div style={{
+                        width: 32, height: 32, borderRadius: 8,
+                        background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        <User size={16} color="#fff" />
+                      </div>
+                    )}
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>
+                        {session.user?.name || 'Usuario'}
+                      </div>
+                      <div style={{ fontSize: 12, color: 'var(--text3)' }}>
+                        {session.user?.email || ''}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => { setMobileOpen(false); signOut(); }}
+                    style={{
+                      width: '100%', height: 44, borderRadius: 10,
+                      background: 'transparent', border: '1px solid #ef4444',
+                      color: '#ef4444', fontSize: 14, fontWeight: 600,
+                      cursor: 'pointer', display: 'flex', alignItems: 'center',
+                      justifyContent: 'center', gap: 8,
+                    }}
+                  >
+                    <LogOut size={15} /> Cerrar sesión
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => { setMobileOpen(false); signIn('google'); }}
+                  style={{
+                    width: '100%', height: 44, borderRadius: 10,
+                    background: 'linear-gradient(135deg, var(--cyan2), var(--violet))',
+                    border: 'none', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  }}
+                >
+                  <LogIn size={15} /> Iniciar sesión con Google
+                </button>
+              )}
             </motion.div>
           )}
         </AnimatePresence>,
@@ -219,6 +347,11 @@ export default function Navbar() {
     .hidden-mobile { display: none !important; }
     .show-mobile { display: flex !important; }
     .nav-inner { padding: 0 16px !important; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.3; }
   }
 `}</style>
     </>
