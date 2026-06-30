@@ -175,7 +175,7 @@ export default function HeroSection({ exchangeRef }: HeroSectionProps) {
             e.currentTarget.style.transform = 'translateY(0)';
           }}
         >
-          Crear cuenta gratis <ArrowRight size={15} />
+          ¡Contáctanos! <ArrowRight size={15} />
         </button>
 
         <button
