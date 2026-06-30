@@ -95,10 +95,10 @@ export const FAQS = [
 ];
 
 export const NAV_LINKS = [
-  { href: '/', label: 'Inicio' },
-  { href: '/features', label: 'Detalles' },
-  { href: '/about', label: 'Nosotros' },
-  { href: '/contact', label: 'Contacto' },
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#exchange', label: 'Exchange' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#contacto', label: 'Contacto' },
 ];
 
 export const TEAM = [

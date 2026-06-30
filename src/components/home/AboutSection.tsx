@@ -10,9 +10,9 @@ const WHY_US = [
   { icon: Handshake, title: 'Cumplimiento y confianza', desc: 'Cumplimos estrictos estándares regulatorios AML/KYC para tu tranquilidad.', color: '#F59E0B' },
 ];
 
-export default function AboutPage() {
+export default function AboutSection() {
   return (
-    <>
+    <section id="nosotros" style={{ scrollMarginTop: '80px' }}>
       {/* Hero */}
       <section className="about-hero" style={{ padding: '72px 32px', background: 'var(--bg2)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
         <ScrollReveal>
@@ -178,6 +178,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </>
+    </section>
   );
 }

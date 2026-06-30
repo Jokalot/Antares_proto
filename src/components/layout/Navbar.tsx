@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X, ArrowRight, LogIn, LogOut, User } from 'lucide-react';
 import { useTheme } from '@/lib/theme-context';
@@ -15,7 +14,7 @@ export default function Navbar() {
   const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
+
   const { data: session, status } = useSession();
 
   useEffect(() => {
@@ -58,30 +57,26 @@ export default function Navbar() {
           }}
           className="hidden-mobile"
         >
-          {NAV_LINKS.map(({ href, label }) => {
-            const active = pathname === href;
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  style={{
-                    display: 'flex', alignItems: 'center',
-                    textDecoration: 'none',
-                    fontSize: 15, fontWeight: 600,
-                    color: active ? 'var(--text)' : 'var(--text2)',
-                    padding: '8px 16px',
-                    borderRadius: 8,
-                    background: active ? 'var(--bg3)' : 'transparent',
-                    transition: 'all 0.18s',
-                  }}
-                  onMouseEnter={e => { if (!active) (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text)'; }}
-                  onMouseLeave={e => { if (!active) (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text2)'; }}
-                >
-                  {label}
-                </Link>
-              </li>
-            );
-          })}
+          {NAV_LINKS.map(({ href, label }) => (
+            <li key={href}>
+              <a
+                href={href}
+                style={{
+                  display: 'flex', alignItems: 'center',
+                  textDecoration: 'none',
+                  fontSize: 15, fontWeight: 600,
+                  color: 'var(--text2)',
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  transition: 'all 0.18s',
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text)'}
+                onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text2)'}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
 
         {/* Right actions */}
@@ -244,31 +239,27 @@ export default function Navbar() {
               }}
             >
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 16, }}>
-                {NAV_LINKS.map(({ href, label }) => {
-                  const active = pathname === href;
-                  return (
-                    <li key={href}>
-                      <Link
-                        href={href}
-                        onClick={() => setMobileOpen(false)}
-                        style={{
-                          display: 'block',
-                          padding: '14px 12px',        // ← más padding vertical
-                          borderRadius: 8,
-                          textDecoration: 'none',
-                          color: active ? 'var(--cyan)' : 'var(--text2)',
-                          background: active ? 'var(--bg3)' : 'transparent',
-                          fontWeight: active ? 600 : 400,
-                          fontSize: 15,
-                          borderBottom: '1px solid var(--border)',  // ← separador
-                          transition: 'all 0.15s',
-                        }}
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {NAV_LINKS.map(({ href, label }) => (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      onClick={() => setMobileOpen(false)}
+                      style={{
+                        display: 'block',
+                        padding: '14px 12px',
+                        borderRadius: 8,
+                        textDecoration: 'none',
+                        color: 'var(--text2)',
+                        fontSize: 15,
+                        fontWeight: 400,
+                        borderBottom: '1px solid var(--border)',
+                        transition: 'all 0.15s',
+                      }}
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
               </ul>
 
               {/* Mobile auth area */}

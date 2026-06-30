@@ -10,7 +10,7 @@ const INFO = [
   { icon: Send, label: 'Telegram', val: COMPANY.telegram, desc: 'Respuesta inmediata' },
   { icon: Clock, label: 'Horario', val: 'Lun – Vie', desc: '9:00 – 18:00 UTC' },
 ];
-export default function ContactPage() {
+export default function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', subject: 'Soporte técnico', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -50,7 +50,7 @@ export default function ContactPage() {
   };
 
   return (
-    <>
+    <section id="contacto" style={{ scrollMarginTop: '80px' }}>
       {/* Hero */}
       <section className="contact-hero" style={{
         padding: '72px 32px 48px',
@@ -271,6 +271,6 @@ export default function ContactPage() {
           to { transform: rotate(360deg); }
         }
       `}</style>
-    </>
+    </section>
   );
 }

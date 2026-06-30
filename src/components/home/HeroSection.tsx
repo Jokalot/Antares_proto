@@ -65,6 +65,7 @@ export default function HeroSection({ exchangeRef }: HeroSectionProps) {
 
   return (
     <section
+      id="inicio"
       className="hero-custom-bg"
       style={{
         position: 'relative',

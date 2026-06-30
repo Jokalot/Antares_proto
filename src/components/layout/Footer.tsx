@@ -3,9 +3,19 @@ import Logo from '@/components/ui/Logo';
 import { ArrowRight } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
-const FOOTER_LINKS = {
-  Plataforma: ['Exchange', 'Trading Pro', 'DeFi', 'API'],
-  Empresa: ['Nosotros', 'Blog', 'Carreras', 'Prensa'],
+const FOOTER_LINKS: Record<string, { label: string; href: string }[]> = {
+  Plataforma: [
+    { label: 'Exchange', href: '#exchange' },
+    { label: 'Trading Pro', href: '#' },
+    { label: 'DeFi', href: '#' },
+    { label: 'API', href: '#' },
+  ],
+  Empresa: [
+    { label: 'Nosotros', href: '#nosotros' },
+    { label: 'Contacto', href: '#contacto' },
+    { label: 'Blog', href: '#' },
+    { label: 'Carreras', href: '#' },
+  ],
 };
 
 const SOCIALS = [
@@ -55,10 +65,10 @@ export default function Footer() {
               </h4>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9 }}>
                 {links.map(link => (
-                  <li key={link}>
-                    <Link href="#" style={{ fontSize: 13, color: 'var(--text2)', textDecoration: 'none', transition: 'color 0.15s' }}>
-                      {link}
-                    </Link>
+                  <li key={link.label}>
+                    <a href={link.href} style={{ fontSize: 13, color: 'var(--text2)', textDecoration: 'none', transition: 'color 0.15s' }}>
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
